@@ -13,6 +13,13 @@ The app uses **React** for the frontend and **Flask** for the backend to handle 
 
 ---
 
+## **Demo View**
+
+### Screenshot 1: Uploading a PDF and Auto Summary Option
+
+![Screenshot 1](./assets/my_chatbot_ui)
+
+
 ## **Features**
 
 1. **PDF Upload**: Upload a PDF file to be analyzed.
