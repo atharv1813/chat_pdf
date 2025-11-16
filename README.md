@@ -1,129 +1,227 @@
-### **README for Document Analyzer App**
+# 📄 AI PDF Intelligence Hub
+
+**Advanced RAG-based PDF Understanding System using LangChain, Vector DB & Perplexity LLM**
+
+A full-stack AI system that converts any PDF into **actionable insights** using **Retrieval-Augmented Generation (RAG)**.
+The application supports smart summarization, mathematical formula extraction, history timelines, student notes, research insights, and custom prompts.
+
+Built with:
+
+* **LangChain** for orchestration
+* **Perplexity Sonar Pro LLM** for reasoning
+* **ChromaDB** Vector Store for semantic retrieval
+* **Flask** backend for document ingestion + RAG pipeline
+* **React + Tailwind CSS** for a clean, modern, glassmorphic UI
+* **PDF parsing & chunking** with custom loaders
 
 ---
 
-# **Document Analyzer App**
+# 📸 Sample Screenshots
 
-## **Overview**
-The **Document Analyzer App** is a web-based application designed to automatically analyze PDF documents, summarize them, and generate customized outputs based on user-defined prompts. Built with **React.js**, **Vite**, and **Flask** for handling the frontend and backend integration, the app provides an intuitive interface for uploading PDF files, generating summaries, and querying the document for custom outputs.
+### **Summary Mode**
 
-The app uses **React** for the frontend and **Flask** for the backend to handle requests for document analysis. It supports:
-1. **Auto Summarization** – Automatically generates a summary based on a specified summary level.
-2. **Custom Output** – Accepts user-defined prompts and returns relevant information from the PDF document.
+![Summary Screenshot](results_screenshots/1.png)
 
----
+### **Research Mode**
 
-## **Demo View**
-![Screenshot 1](./assets/my_chatbot_ui.png)
-
-
-## **Features**
-
-1. **PDF Upload**: Upload a PDF file to be analyzed.
-2. **Auto Summary**: Generate a summary of the PDF content based on the specified summary level (1-5).
-3. **Custom Prompt**: Allow users to provide custom queries to extract specific information from the uploaded PDF.
-4. **Error Handling**: User-friendly error messages for file upload issues or missing inputs.
-5. **Responsive Design**: The app is built using **Tailwind CSS** to ensure responsiveness across various screen sizes.
+![Research Screenshot](results_screenshots/5.png)
 
 ---
 
-## **Tech Stack**
+# 🚀 Features
 
-- **Frontend**:
-  - **React.js** for building the user interface.
-  - **Vite** for fast development and build tooling.
-  - **Tailwind CSS** for styling the app and responsive design.
-  - **Axios** for API requests to interact with the backend.
-  - **ReactMarkdown** to render Markdown-formatted content.
+### 🔎 1. AI-Powered PDF Analysis
 
-- **Backend**:
-  - **Flask** for creating API endpoints that handle PDF processing and generate summaries or custom outputs.
-  - **Python libraries** (e.g., **PyMuPDF**, **Pandas**, **NLTK**) for extracting and processing PDF content.
+Upload any PDF and ask the AI to:
+
+* Generate summaries (short → in-depth)
+* Extract mathematical equations & formulas
+* Generate student-friendly topic breakdowns
+* Extract historical timelines
+* Extract research objectives & conclusions
+* Provide answers using **RAG-based QA**
 
 ---
 
-## **Installation & Setup**
+### 🧠 2. Retrieval-Augmented Generation (RAG)
 
-### **1. Clone the repository:**
+* Extract & chunk PDF text
+* Embed using chosen embedding provider
+* Store in **ChromaDB** vector store
+* Query through LangChain RetrievalQA
+* Perplexity LLM produces precise, source-aware answers
 
-```bash
-git clone <repository-url>
-cd <project-directory>
+---
+
+### 📚 3. Document Ingestion Pipeline
+
+When a PDF is ingested, the system:
+
+1. Extracts text
+2. Splits content into clean semantic chunks
+3. Embeds chunks
+4. Builds or updates the local vector database
+5. Wires it into the RAG chain for future queries
+
+---
+
+### 🎨 4. Modern Professional UI
+
+Built using **React + Tailwind CSS** with:
+
+* Dark-blue futuristic theme
+* Hover animations
+* Split view (left = controls, right = results)
+* Scrollable output container
+* Markdown rendering & formatting
+
+---
+
+# 🏗️ Tech Stack
+
+### **Backend**
+
+| Component      | Technology                              |
+| -------------- | --------------------------------------- |
+| Language       | Python                                  |
+| Framework      | Flask                                   |
+| LLM            | Perplexity Sonar Pro (`ChatPerplexity`) |
+| RAG Framework  | LangChain                               |
+| Vector Store   | ChromaDB                                |
+| Embeddings     | Custom provider (configurable)          |
+| PDF Processing | PyPDF2 / pdfminer                       |
+
+---
+
+### **Frontend**
+
+| Component    | Technology                            |
+| ------------ | ------------------------------------- |
+| UI Framework | React + Vite                          |
+| Styling      | Tailwind CSS (Custom dark-blue theme) |
+| Rendering    | React Markdown                        |
+| Networking   | Axios                                 |
+
+---
+
+# 📦 Project Structure
+
+```
+📂 backend/
+ ├── app.py                 # Flask server routes
+ ├── loader.py              # PDF extraction & chunking
+ ├── rag_chain.py           # LangChain RAG pipeline
+ ├── embeddings_store.py    # Embeddings + Chroma setup
+ ├── prompts.py             # Dynamic prompt templates
+ ├── .env                   # API Keys
+
+📂 frontend/
+ ├── src/App.jsx            # Full UI with split panels
+ ├── components/...
+ ├── styles/global.css
+ ├── vite.config.js
 ```
 
-### **2. Frontend Setup (React + Vite)**
+---
 
-#### Install dependencies:
-First, install **Node.js** (if not installed already), then install the frontend dependencies:
+# 🔧 API Endpoints
+
+### **POST /api/summarize**
+
+Handles PDF upload + summarization / mode-based extraction
+Supports:
+
+* summary
+* maths
+* history
+* student
+* research
+* custom prompt override
+
+---
+
+### **POST /api/ingest**
+
+Indexes a PDF into ChromaDB for RAG queries.
+
+---
+
+### **POST /api/qa**
+
+Query the indexed document using RetrievalQA.
+
+---
+
+# 🧩 How the RAG Flow Works
+
+```
+      PDF Upload
+           ↓
+   Text Extraction (loader.py)
+           ↓
+   Chunking (semantic splits)
+           ↓
+   Embedding Generation
+           ↓
+   Chroma Vector Store
+           ↓
+   Retrieval via LangChain
+           ↓
+   Perplexity LLM (Sonar Pro)
+           ↓
+   Final AI Response
+```
+
+---
+
+# 📱 Frontend UI Features
+
+* Left side: PDF upload + prompt + controls
+* Right side: Scrollable output panel
+* Glassblur + gradients + neon hover effects
+* Markdown rendering for equations & structured output
+* Instant mode switching
+
+---
+
+# ⚙️ Environment Setup
+
+### **Backend Setup**
+
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+Your `.env` file must contain:
+
+```
+PERPLEXITY_API_KEY=your_key_here
+```
+
+---
+
+### **Frontend Setup**
 
 ```bash
 cd frontend
 npm install
-```
-
-#### Start the frontend:
-```bash
 npm run dev
 ```
 
-The React app should now be running locally at **http://localhost:3000**.
-
-### **3. Backend Setup (Flask)**
-
-#### Install dependencies:
-First, make sure **Python 3.x** is installed, then create a virtual environment and install the backend dependencies:
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-pip install -r requirements.txt
-```
-
-#### Start the Flask backend:
-```bash
-python app.py
-```
-
-The Flask backend will be running on **http://localhost:5000**.
-
 ---
 
-## **Usage**
+# 🌟 Why This Project Is Resume-Worthy
 
-1. **Upload a PDF file**: 
-    - Click the file input to upload a PDF document from your local system.
+This project demonstrates:
 
-2. **Auto Summarization**:
-    - Enter a **Summary Level** (1-5):
-      - **1**: Brief summary.
-      - **5**: Detailed summary.
-    - Click **Auto Summarize** to generate a summary of the document.
+✔ Mastery of LangChain pipelines
+✔ Ability to implement Retrieval-Augmented Generation
+✔ Experience with Vector DBs (ChromaDB)
+✔ Custom prompts, summarization modes & logic
+✔ Integration of Perplexity commercial-grade LLM
+✔ Strong frontend/UI engineering
+✔ Complete end-to-end AI application design
 
-3. **Custom Prompt**:
-    - Enter a custom query (e.g., "What are the main findings of the study?").
-    - Click **Generate Custom Output** to get relevant information based on the document content.
-
-4. **View Results**: 
-    - View the generated auto summary and/or the custom output on the page.
-
----
-
-
-## **Backend API Endpoints**
-
-### **POST** `/api/autosummarize`
-- **Request body**:
-    - `uploaded_file` (PDF file)
-    - `summary_level` (integer, 1-5)
-- **Response**:
-    - `auto_summary` (string) – the auto-generated summary of the document.
-
-### **POST** `/api/customprompt`
-- **Request body**:
-    - `uploaded_file` (PDF file)
-    - `prompt` (string) – user-defined query.
-- **Response**:
-    - `output` (string) – output generated based on the prompt.
-
----
+Perfect for **AI Engineer**, **ML Engineer**, **Gen-AI**, **Full-Stack AI**, or **Research Engineer** roles.

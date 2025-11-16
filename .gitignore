@@ -1,0 +1,31 @@
+# Node
+node_modules/
+public/dist/
+dist/
+.vite/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.myenv/
+myenv/
+.venv/
+
+# OS Junk
+.DS_Store
+Thumbs.db
+
+# Environment keys
+.env
+
+# Vite / React
+*.cache/
+*.tmp/
+
+# VS Code
+.vscode/
